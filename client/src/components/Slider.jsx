@@ -79,17 +79,17 @@ function Slider({ circles, strokeDistance, colour, angle, radiusX, radiusY, hand
 export default Slider
 
 Slider.propTypes = {
-    circles: PropTypes.number,
-    strokeDistance: PropTypes.number,
-    colour: PropTypes.string,
-    angle: PropTypes.bool,
-    radiusX: PropTypes.string,
-    radiusY: PropTypes.string,
-    handleColourChange: PropTypes.func,
-    handleSliderAmountChange: PropTypes.func,
-    handleSliderStrokeDistanceChange: PropTypes.func,
-    handleCheckboxChange: PropTypes.func,
-    handleSliderRadiusXChange: PropTypes.func,
-    handleSliderRadiusYChange: PropTypes.func,
+    circles: PropTypes.number.isRequired,
+    strokeDistance: PropTypes.number.isRequired,
+    colour: PropTypes.string.isRequired,
+    angle: PropTypes.bool.isRequired,
+    radiusX: PropTypes.string.isRequired,
+    radiusY: PropTypes.string.isRequired,
+    handleColourChange: PropTypes.func.isRequired,
+    handleSliderAmountChange: PropTypes.func.isRequired,
+    handleSliderStrokeDistanceChange: PropTypes.func.isRequired,
+    handleCheckboxChange: PropTypes.func.isRequired,
+    handleSliderRadiusXChange: PropTypes.func.isRequired,
+    handleSliderRadiusYChange: PropTypes.func.isRequired,
 
 }

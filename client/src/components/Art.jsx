@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 const Art = ({ circles, colour, strokeDistance, angle, radiusX, radiusY }) => {
 
     const circleArray = new Array(circles).fill('I am a circle')
-    console.log(circleArray)
+    // console.log(circleArray)
 
     return (
         <div className="svg__wrapper">
@@ -38,13 +38,14 @@ const Art = ({ circles, colour, strokeDistance, angle, radiusX, radiusY }) => {
         </div>
     );
 };
-export default Art;
 
 Art.propTypes = {
     circles: PropTypes.number.isRequired,
     strokeDistance: PropTypes.number.isRequired,
     colour: PropTypes.string.isRequired,
-    radiusX: PropTypes.string.isRequired,
-    radiusY: PropTypes.string.isRequired,
+    radiusX: PropTypes.number.isRequired,
+    radiusY: PropTypes.number.isRequired,
     angle: PropTypes.bool.isRequired,
 };
+
+export default Art;

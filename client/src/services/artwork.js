@@ -6,6 +6,7 @@ const getArtworks = async () => {
     return artworks.map(unwrapAtributes);
 };
 const createArtwork = async (data) => {
+    console.log(data);
     const artwork = await fetchApi(
         {
             endpoint: "artworks",

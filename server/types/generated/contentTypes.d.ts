@@ -380,8 +380,13 @@ export interface ApiArtworkArtwork extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.user'
     >;
-    svg: Attribute.JSON;
     description: Attribute.Text;
+    amount: Attribute.Integer;
+    expand: Attribute.Integer;
+    colour: Attribute.String;
+    angle: Attribute.Boolean & Attribute.DefaultTo<false>;
+    xradius: Attribute.Integer;
+    yradius: Attribute.Integer;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

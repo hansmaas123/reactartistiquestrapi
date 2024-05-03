@@ -21,11 +21,27 @@
       "target": "plugin::users-permissions.user",
       "inversedBy": "artworks"
     },
-    "svg": {
-      "type": "json"
-    },
     "description": {
       "type": "text"
+    },
+    "amount": {
+      "type": "integer"
+    },
+    "expand": {
+      "type": "integer"
+    },
+    "colour": {
+      "type": "string"
+    },
+    "angle": {
+      "type": "boolean",
+      "default": false
+    },
+    "xradius": {
+      "type": "integer"
+    },
+    "yradius": {
+      "type": "integer"
     }
   }
 }
