@@ -1,12 +1,14 @@
-import styles from './Header.module.css';
+import '../styles/style.css';
 import { Link } from 'react-router-dom'
 
 const Header = () => {
     return (
-        <div className={styles.header__wrapper}>
-        <Link to="/" className={styles.title__link}>
-            <h1 className={styles.title}>REACT ARTISTIQUE</h1>
-        </Link>
+        <div className='header__wrapper'>
+            <div className="link__wrapper">
+                <Link to="/" className="header__title--wrapper">
+                    <h1 className="title">REACT ARTISTIQUE</h1>
+                </Link>
+            </div>
         </div>
     )
 }

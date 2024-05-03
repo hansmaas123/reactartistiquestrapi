@@ -371,7 +371,7 @@ export interface ApiArtworkArtwork extends Schema.CollectionType {
     description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     title: Attribute.String;
@@ -381,9 +381,9 @@ export interface ApiArtworkArtwork extends Schema.CollectionType {
       'plugin::users-permissions.user'
     >;
     svg: Attribute.JSON;
+    description: Attribute.Text;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::artwork.artwork',
       'oneToOne',

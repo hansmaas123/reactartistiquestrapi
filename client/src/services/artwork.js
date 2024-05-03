@@ -5,6 +5,22 @@ const getArtworks = async () => {
     if (!artworks) return [];
     return artworks.map(unwrapAtributes);
 };
+const createArtwork = async (data) => {
+    const artwork = await fetchApi(
+        {
+            endpoint: "artworks",
+        },
+        {
+            method: "POST",
+            body: JSON.stringify({ data }),
+            headers: {
+                "Content-Type": "application/json",
+                // Authorization: `Bearer ${getToken()}`,
+            },
+        }
+    );
+    return unwrapAtributes(artwork);
+};
 
 const getArtworkById = async (id) => {
     const artwork = await fetchApi({
@@ -15,4 +31,4 @@ const getArtworkById = async (id) => {
     return unwrapAtributes(artwork);
 };
 
-export { getArtworks, getArtworkById };
+export { getArtworks, createArtwork, getArtworkById };

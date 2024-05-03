@@ -8,7 +8,7 @@
     "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
@@ -23,6 +23,9 @@
     },
     "svg": {
       "type": "json"
+    },
+    "description": {
+      "type": "text"
     }
   }
 }

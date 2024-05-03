@@ -1,0 +1,29 @@
+.title{
+    font-size: 50px;
+}
+.list {
+    display: grid;
+    align-items: start;
+    grid-template-columns: repeat(auto-fit, minmax(var(--size-14), 1fr));
+    gap: var(--size-3);
+
+    height: 100%;
+    align-content: start;
+}
+
+
+
+
+/* header */
+
+.header__wrapper {
+
+}
+
+.link__wrapper {
+
+}
+
+.header__title--wrapper {
+
+}

@@ -1,7 +1,7 @@
 import { Link, useLoaderData } from "react-router-dom";
 import { getArtworks } from '../services/artwork';
 import ArtworkCard from '../components/ArtworkCard';
-import styles from "./index.module.css"
+import "./../styles/style.css"
 // import { useState } from 'react';
 
 const loader = async () => {
@@ -20,7 +20,9 @@ const Index = () => {
     //     radiusY: '50%',
     // })
     return (
-        <ul className={styles.artwork__list}>
+    <>
+        <Link to={`/artwork/create/`}><button>CREATE</button></Link>
+        <ul className="artwork__list">
             {artworks.map((artwork) => (
                 <li key={artwork.id}>
                     <Link to={`/artwork/${artwork.id}`}>
@@ -29,6 +31,7 @@ const Index = () => {
                 </li>
             ))}
         </ul>
+    </>
     );
 }
 Index.loader = loader;

@@ -1,6 +1,6 @@
 import { getArtworkById } from "../services/artwork";
 import { useLoaderData } from "react-router-dom";
-import styles from "./artworkDetail.module.css";
+import "./../styles/style.css";
 import Art from '../components/Art';
 // import Slider from './components/Slider';
 // import { useState } from 'react';
@@ -30,16 +30,13 @@ const ArtworkDetail = () => {
 
     return (
         <div>
-            <div className={styles.header}>
-                <h2 className={styles.title}>{artwork.title}</h2>
+            <div className="header">
+                <h2 className="title">{artwork.title}</h2>
+                <p className="description">{artwork.description}</p>
             </div>
-            <div className={styles.row}>
+            <div className="row">
             </div>
             <div className='art__wrapper'>
-                <div className='slider__wrapper'>
-                    <h1 className='label'>MAKE YOUR ART</h1>
-                    {/* <Slider circles={properties.circles} colour={properties.colour} strokeDistance={properties.strokeDistance} angle={properties.angle} radiusX={properties.radiusX} radiusY={properties.radiusY} handleSliderAmountChange={handleSliderAmountChange} handleSliderStrokeDistanceChange={handleSliderStrokeDistanceChange} handleColourChange={handleColourChange} handleCheckboxChange={handleCheckboxChange} handleSliderRadiusXChange={handleSliderRadiusXChange} handleSliderRadiusYChange={handleSliderRadiusYChange} /> */}
-                </div>
                 <Art circles={JSON.parse(json.circles)} colour={json.colour} strokeDistance={JSON.parse(json.strokeDistance)} angle={JSON.parse(json.angle)} radiusX={json.radiusX} radiusY={json.radiusY} />
             </div>
         </div>

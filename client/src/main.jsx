@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Index from "./routes";
 import Root from "./routes/root";
 import ArtworkDetail from './routes/artworkDetail'
+import CreateArtwork from './routes/createArtwork'
 import ErrorPage from "./routes/error-page";
 
 const router = createBrowserRouter([
@@ -17,9 +18,15 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Index />, loader: Index.loader },
       {
-        path: "artwork/:id",
+        path: "/artwork/:id",
         element: <ArtworkDetail />,
         loader: ArtworkDetail.loader
+      },
+      {
+        path: "/artwork/create",
+        element: <CreateArtwork />,
+        loader: CreateArtwork.loader,
+        action: CreateArtwork.action
       },
     ]
   }
