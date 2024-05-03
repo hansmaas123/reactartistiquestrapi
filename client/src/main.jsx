@@ -7,6 +7,7 @@ import Root from "./routes/root";
 import ArtworkDetail from './routes/artworkDetail'
 import CreateArtwork from './routes/createArtwork'
 import ErrorPage from "./routes/error-page";
+import UpdateArtwork from './routes/updateArtwork';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,12 @@ const router = createBrowserRouter([
         element: <CreateArtwork />,
         loader: CreateArtwork.loader,
         action: CreateArtwork.action
+      },
+      {
+        path: "/artwork/:id/update",
+        element: <UpdateArtwork />,
+        loader: UpdateArtwork.loader,
+        action: UpdateArtwork.action
       },
     ]
   }

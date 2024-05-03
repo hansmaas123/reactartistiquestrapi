@@ -1,24 +1,40 @@
-import "../styles/style.css";
-import { Form, redirect } from "react-router-dom";
-import { createArtwork } from "../services/artwork";
-import Art from '../components/Art'
-import { useState } from 'react';
+import { Form, redirect, useLoaderData } from "react-router-dom";
+import  "../styles/style.css";
+import { getArtworkById, editArtwork } from "../services/artwork";
+import Art from "../components/Art";
+import { useState } from "react";
 
-const action = async ({ request }) => {
+const loader = async ({ params }) => {
+    // const { user } = getAuthData();
+    // if (!user) {
+    //     let params = new URLSearchParams();
+    //     params.set("from", new URL(request.url).pathname);
+    //     return redirect("/auth/login?" + params.toString());
+    // }
+    const artwork = await getArtworkById(params.id);
+    // if (user.id != cheese.owner.data.id) {
+    //     return redirect(`/cheese/${params.id}`);
+    // }
+    return { artwork };
+};
+
+const action = async ({ request, params }) => {
     const formData = await request.formData();
     const data = Object.fromEntries(formData);
-    await createArtwork(data);
-    return redirect(`/`);
-}
+    await editArtwork(params.id, data);
+    return redirect(`/artwork/${params.id}`);
+};
 
-const CreateArtwork = () => {
+const UpdateArtwork = () => {
+    const { artwork } = useLoaderData();
+
     const [properties, setProperties] = useState({
-        circles: Math.floor((Math.random() * 49) + 1),
-        strokeDistance: 0.2,
-        colour: "#" + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0').toUpperCase(),
-        angle: false,
-        radiusX: 50,
-        radiusY: 50,
+        circles: artwork.amount,
+        strokeDistance: artwork.expand,
+        colour: artwork.colour,
+        angle: artwork.angle,
+        radiusX: artwork.xradius,
+        radiusY: artwork.yradius,
     })
 
     const handleSliderAmountChange = (e) => {
@@ -69,19 +85,19 @@ const CreateArtwork = () => {
             ...updatedValue
         }))
     }
-
+    console.log(properties);
 
     return (
         <>
             <Form method="POST">
                 <div className="form__group">
                     <label htmlFor="name">Name</label>
-                    <input type="text" id="title" name="title" />
+                    <input type="text" id="title" name="title" defaultValue={artwork.title} required />
                 </div>
 
                 <div className="form__group">
                     <label htmlFor="description"></label>
-                    <textarea name="description" id="description" cols="30" rows="5" ></textarea>
+                    <textarea name="description" id="description" cols="30" rows="5" defaultValue={artwork.description} required></textarea>
                 </div>
 
                 <label className="label">
@@ -126,7 +142,7 @@ const CreateArtwork = () => {
                         id="angle"
                         name="angle"
                         onChange={handleCheckboxChange}
-                        value={false}
+                        value={properties.angle}
                     />
                 </label>
                 <label className="label">
@@ -159,9 +175,11 @@ const CreateArtwork = () => {
             </Form>
             <Art circles={properties.circles} colour={properties.colour} strokeDistance={properties.strokeDistance} angle={properties.angle} radiusX={properties.radiusX} radiusY={properties.radiusY} />
         </>
-    );
+    )
 }
 
-CreateArtwork.action = action;
 
-export default CreateArtwork;
+UpdateArtwork.loader = loader;
+UpdateArtwork.action = action;
+
+export default UpdateArtwork;

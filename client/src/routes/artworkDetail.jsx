@@ -1,5 +1,5 @@
 import { getArtworkById } from "../services/artwork";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, Link } from "react-router-dom";
 import "./../styles/style.css";
 import Art from '../components/Art';
 // import Slider from './components/Slider';
@@ -30,6 +30,7 @@ const ArtworkDetail = () => {
         <div>
             <div className="header">
                 <h2 className="title">{artwork.title}</h2>
+                <Link to={`/artwork/${artwork.id}/update`}>Edit artwork</Link>
                 <p className="description">{artwork.description}</p>
             </div>
             <div className="row">
