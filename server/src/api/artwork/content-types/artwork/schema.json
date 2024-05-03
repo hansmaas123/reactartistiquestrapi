@@ -4,7 +4,8 @@
   "info": {
     "singularName": "artwork",
     "pluralName": "artworks",
-    "displayName": "Artwork"
+    "displayName": "Artwork",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -13,9 +14,6 @@
   "attributes": {
     "title": {
       "type": "string"
-    },
-    "svg": {
-      "type": "json"
     },
     "owner": {
       "type": "relation",

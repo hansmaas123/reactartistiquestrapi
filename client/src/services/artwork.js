@@ -1,4 +1,3 @@
-import { getToken } from "./auth";
 import { fetchApi, unwrapAtributes } from "./strapi";
 
 const getArtworks = async () => {

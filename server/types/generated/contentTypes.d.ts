@@ -368,13 +368,13 @@ export interface ApiArtworkArtwork extends Schema.CollectionType {
     singularName: 'artwork';
     pluralName: 'artworks';
     displayName: 'Artwork';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     title: Attribute.String;
-    svg: Attribute.JSON;
     owner: Attribute.Relation<
       'api::artwork.artwork',
       'manyToOne',
