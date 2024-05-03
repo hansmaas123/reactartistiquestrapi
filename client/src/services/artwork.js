@@ -22,6 +22,22 @@ const createArtwork = async (data) => {
     );
     return unwrapAtributes(artwork);
 };
+// const deleteArtwork = async (id, data) => {
+//     const artwork = await fetchApi(
+//         {
+//             endpoint: `artworks/${id}`,
+//         },
+//         {
+//             method: "DELETE",
+//             body: JSON.stringify({ data }),
+//             headers: {
+//                 "Content-Type": "application/json",
+//                 // Authorization: `Bearer ${getToken()}`,
+//             },
+//         }
+//     );
+//     return unwrapAtributes(artwork);
+// };
 
 const editArtwork = async(id, data) => {
     const artwork = await fetchApi(
