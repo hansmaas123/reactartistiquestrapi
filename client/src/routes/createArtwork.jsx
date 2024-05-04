@@ -84,17 +84,20 @@ const CreateArtwork = () => {
 
     return (
         <>
-            <Form method="POST">
+        <div className="artwork__visual">
+            <Art circles={properties.circles} colour={properties.colour} strokeDistance={properties.strokeDistance} angle={properties.angle} radiusX={properties.radiusX} radiusY={properties.radiusY} />
+        </div>
+            <Form className="form" method="POST">
                 <div className="form__group">
-                    <label htmlFor="name">Name</label>
-                    <input type="text" id="title" name="title" />
+                    <label className="label" htmlFor="name">TITLE</label>
+                    <input className="input__field" type="text" id="title" name="title" />
                 </div>
 
                 <div className="form__group">
-                    <label htmlFor="description"></label>
-                    <textarea name="description" id="description" cols="30" rows="5" ></textarea>
+                    <label className="label" htmlFor="description">DESCRIPTION</label>
+                    <textarea className="input__field" name="description" id="description" cols="30" rows="5" ></textarea>
                 </div>
-
+            <div className="form__sliders--wrapper">
                 <label className="label">
                     <span>Amount</span>
                     <input
@@ -164,11 +167,11 @@ const CreateArtwork = () => {
                         onChange={handleSliderRadiusYChange}
                     />
                 </label>
+                </div>
                 <div className="form__group">
-                    <input type="submit" className="submit" value="Add this artwork" />
+                    <input type="submit" className="submit__button" value="ADD ARTWORK" />
                 </div>
             </Form>
-            <Art circles={properties.circles} colour={properties.colour} strokeDistance={properties.strokeDistance} angle={properties.angle} radiusX={properties.radiusX} radiusY={properties.radiusY} />
         </>
     );
 }

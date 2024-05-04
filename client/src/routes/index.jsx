@@ -23,8 +23,8 @@ const Index = () => {
     <>
         <ul className="artwork__list">
             {artworks.map((artwork) => (
-                <li key={artwork.id}>
-                    <Link to={`/artwork/${artwork.id}`}>
+                <li className="artwork__list--item" key={artwork.id}>
+                    <Link className="artwork__link" to={`/artwork/${artwork.id}`}>
                         <ArtworkCard artwork={artwork} />
                     </Link>
                 </li>

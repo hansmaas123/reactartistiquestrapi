@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import '../styles/style.css'
 
 const Art = ({ circles, colour, strokeDistance, angle, radiusX, radiusY }) => {
 
@@ -7,7 +8,7 @@ const Art = ({ circles, colour, strokeDistance, angle, radiusX, radiusY }) => {
 
     return (
         <div className="svg__wrapper">
-            <svg width={'100%'} height={'100%'}>
+            <svg className="svg" width={'100%'} height={'100%'}>
                 {angle === true ? (
                     circleArray.map((_, index) => (
                         <rect

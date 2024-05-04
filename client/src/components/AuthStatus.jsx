@@ -12,7 +12,7 @@ const AuthStatus = () => {
                     <Link className="header__button" to="/auth/profile">PROFILE</Link>
                 </>
             ) : (
-                <Link className="header__button" to="/auth/login">Sign in</Link>
+                <Link className="header__button" to="/auth/login">SIGN IN</Link>
             )}
         </div>
     )

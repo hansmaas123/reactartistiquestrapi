@@ -90,17 +90,20 @@ const UpdateArtwork = () => {
 
     return (
         <>
-            <Form method="POST">
+        <div className="artwork__visual">
+                <Art circles={properties.circles} colour={properties.colour} strokeDistance={properties.strokeDistance} angle={properties.angle} radiusX={properties.radiusX} radiusY={properties.radiusY} />
+        </div>
+            <Form className="form" method="POST">
                 <div className="form__group">
-                    <label htmlFor="name">Name</label>
-                    <input type="text" id="title" name="title" defaultValue={artwork.title} required />
+                    <label className="label" htmlFor="name">Name</label>
+                    <input type="text" className="input__field" id="title" name="title" defaultValue={artwork.title} required />
                 </div>
 
                 <div className="form__group">
-                    <label htmlFor="description"></label>
-                    <textarea name="description" id="description" cols="30" rows="5" defaultValue={artwork.description} required></textarea>
+                    <label className="label" htmlFor="description">DESCRIPTION</label>
+                    <textarea className="input__field" name="description" id="description" cols="30" rows="5" defaultValue={artwork.description} required></textarea>
                 </div>
-
+                <div className="form__sliders--wrapper">
                 <label className="label">
                     <span>Amount</span>
                     <input
@@ -170,21 +173,19 @@ const UpdateArtwork = () => {
                         onChange={handleSliderRadiusYChange}
                     />
                 </label>
+                </div>
                 <div className="form__group">
-                    <input type="submit" className="submit" value="Add this artwork" />
+                    <input type="submit" className="submit__button" value="UPDATE ARTWORK" />
                 </div>
             </Form>
-            <Art circles={properties.circles} colour={properties.colour} strokeDistance={properties.strokeDistance} angle={properties.angle} radiusX={properties.radiusX} radiusY={properties.radiusY} />
-            <Form
-                method="post"
-                action="destroy"
+            <Form method="post" action="destroy" className="delete__wrapper"
                 onSubmit={(event) => {
                     if (!confirm("Confirm to delete this artwork.")) {
                         event.preventDefault();
                     }
                 }}
             >
-                <button type="submit">DELETE</button>
+                <button type="submit" className="submit__button delete__button">DELETE</button>
             </Form>
         </>
     )

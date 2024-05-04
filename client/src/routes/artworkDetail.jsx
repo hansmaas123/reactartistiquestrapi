@@ -15,19 +15,23 @@ const ArtworkDetail = () => {
 
     return (
         <div>
-            <div className="header">
-                <h2 className="title">{artwork.title}</h2>
-                <Link to={`/artwork/${artwork.id}/update`}>UPDATE ARTWORK</Link>
-                <p className="description">{artwork.description}</p>
-                <p>BY</p>
-                <Link to={`/user/${artwork.owner.data.id}`}>
+            <div className="header__detail">
+                <div className="details__wrapper">
+                <h2 className="artwork__title">{artwork.title}</h2>
+                <p className="description">DESCRIPTION: {artwork.description}</p>
+                <p className="by">MADE BY:</p>
+                <Link className="creator" to={`/user/${artwork.owner.data.id}`}>
                     {`BY ${artwork.owner.data.attributes.username}`}
                 </Link>
+                </div>
+            <div className='art__wrapper'>
+                <div className="artwork__detail--visual">
+                <Art circles={artwork.amount} colour={artwork.colour} strokeDistance={artwork.expand} angle={artwork.angle} radiusX={artwork.xradius} radiusY={artwork.yradius} />
+                </div>
+                <Link className="update__link" to={`/artwork/${artwork.id}/update`}>UPDATE ARTWORK</Link>
+            </div>
             </div>
             <div className="row">
-            </div>
-            <div className='art__wrapper'>
-                <Art circles={artwork.amount} colour={artwork.colour} strokeDistance={artwork.expand} angle={artwork.angle} radiusX={artwork.xradius} radiusY={artwork.yradius} />
             </div>
         </div>
         
