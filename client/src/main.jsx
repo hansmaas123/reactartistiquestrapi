@@ -13,6 +13,8 @@ import Register from './routes/auth/register';
 import Profile from './routes/auth/profile';
 import { removeAuthData } from './services/auth'
 import User from './routes/user'
+import { action as destroyAction } from "./routes/destroy";
+
 
 const router = createBrowserRouter([
   {
@@ -68,10 +70,14 @@ const router = createBrowserRouter([
         element: <User />,
         loader: User.loader,
       },
+      {
+        path: "artwork/:id/update/destroy",
+        action: destroyAction,
+        errorElement: <div>BUMMER! There was an error.</div>,
+      },
     ]
   }
 ]);
-
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

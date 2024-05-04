@@ -17,7 +17,7 @@ const ArtworkDetail = () => {
         <div>
             <div className="header">
                 <h2 className="title">{artwork.title}</h2>
-                <Link to={`/artwork/${artwork.id}/update`}>Edit artwork</Link>
+                <Link to={`/artwork/${artwork.id}/update`}>UPDATE ARTWORK</Link>
                 <p className="description">{artwork.description}</p>
                 {/* <p className="owner">{`BY ${artwork.owner.username}`}</p> */}
             </div>

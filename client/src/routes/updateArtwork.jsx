@@ -3,18 +3,19 @@ import  "../styles/style.css";
 import { getArtworkById, editArtwork } from "../services/artwork";
 import Art from "../components/Art";
 import { useState } from "react";
+import { getAuthData } from "../services/auth";
 
-const loader = async ({ params }) => {
-    // const { user } = getAuthData();
-    // if (!user) {
-    //     let params = new URLSearchParams();
-    //     params.set("from", new URL(request.url).pathname);
-    //     return redirect("/auth/login?" + params.toString());
-    // }
+const loader = async ({ request, params }) => {
+    const { user } = getAuthData();
+    if (!user) {
+        let params = new URLSearchParams();
+        params.set("from", new URL(request.url).pathname);
+        return redirect("/auth/login?" + params.toString());
+    }
     const artwork = await getArtworkById(params.id);
-    // if (user.id != cheese.owner.data.id) {
-    //     return redirect(`/cheese/${params.id}`);
-    // }
+    if (user.id != artwork.owner.data.id) {
+        return redirect(`/artwork/${params.id}`);
+    }
     return { artwork };
 };
 
@@ -174,6 +175,17 @@ const UpdateArtwork = () => {
                 </div>
             </Form>
             <Art circles={properties.circles} colour={properties.colour} strokeDistance={properties.strokeDistance} angle={properties.angle} radiusX={properties.radiusX} radiusY={properties.radiusY} />
+            <Form
+                method="post"
+                action="destroy"
+                onSubmit={(event) => {
+                    if (!confirm("Confirm to delete this artwork.")) {
+                        event.preventDefault();
+                    }
+                }}
+            >
+                <button type="submit">DELETE</button>
+            </Form>
         </>
     )
 }

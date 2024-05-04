@@ -23,22 +23,18 @@ const createArtwork = async (data) => {
     );
     return unwrapAtributes(artwork);
 };
-// const deleteArtwork = async (id, data) => {
-//     const artwork = await fetchApi(
-//         {
-//             endpoint: `artworks/${id}`,
-//         },
-//         {
-//             method: "DELETE",
-//             body: JSON.stringify({ data }),
-//             headers: {
-//                 "Content-Type": "application/json",
-//                 // Authorization: `Bearer ${getToken()}`,
-//             },
-//         }
-//     );
-//     return unwrapAtributes(artwork);
-// };
+const deleteArtwork = async (id) => {
+    const artwork = await fetchApi(
+        {
+            endpoint: `artworks/${id}`,
+        },
+        {
+            method: "DELETE",
+        },
+    );
+    if (artwork.error) throw new Error(artwork.error);
+    return true;
+};
 
 const editArtwork = async(id, data) => {
     const artwork = await fetchApi(
@@ -66,4 +62,4 @@ const getArtworkById = async (id) => {
     return unwrapAtributes(artwork);
 };
 
-export { getArtworks, createArtwork, getArtworkById, editArtwork };
+export { getArtworks, createArtwork, getArtworkById, editArtwork, deleteArtwork };
