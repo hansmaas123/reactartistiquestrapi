@@ -10,6 +10,7 @@ import ErrorPage from "./routes/error-page";
 import UpdateArtwork from './routes/updateArtwork';
 import Login from './routes/auth/login';
 import Register from './routes/auth/register';
+import Profile from './routes/auth/profile';
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,12 @@ const router = createBrowserRouter([
         path: "/auth/register",
         element: <Register />,
         action: Register.action,
+      },
+      {
+        path: "/auth/profile",
+        element: <Profile />,
+        loader: Profile.loader,
+        action: Profile.action,
       },
     ]
   }
