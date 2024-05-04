@@ -41,6 +41,7 @@ main{
     justify-content: center;
     align-items: center;
     padding: 1rem 3rem;
+    background: #140931;
 }
 
 .link__wrapper {
@@ -125,7 +126,6 @@ span {
     margin-left: 2rem;
     padding: 1.5rem 2rem;
         background-color: rgb(252, 250, 255);
-        width: fit-content;
         border-radius: 8px;
 }
 .form__sliders--wrapper{
@@ -217,8 +217,8 @@ dd{
     margin-bottom: .5rem;
 }
 .logout__button{
-    background-color: #fff;
-        color: #001114;
+    background-color: red;
+        color: white;
         padding: 1rem 2rem;
         border: none;
         font-weight: bold;
@@ -250,4 +250,52 @@ dd{
     border-radius: 4px;
     width: fit-content;
     margin-bottom: 2rem;
+}
+.user__title{
+    font-size: 40px;
+    color: white;
+    margin-left: 2rem;
+    text-transform: uppercase;
+}
+.login__wrapper{
+    margin-left: 2rem;
+    color: white;
+}
+.login__title{
+    font-size: 40px;
+}
+.login__group{
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    margin-bottom: 1rem;
+}
+.login__item{
+    margin-bottom: .5rem;
+}
+.login__input{
+    margin-bottom: 1rem;
+    border: none;
+    border-radius: 4px;
+    padding: .5rem;
+}
+.login__button{
+    background-color: white;
+        color: #001114;
+        padding: .5rem 2rem;
+        border: none;
+        font-weight: bold;
+        border-radius: 5px;
+        font-weight: bold;
+        font-size: 16px;
+        text-decoration: none;
+        margin: 0rem 1rem;
+        margin-left: 0;
+        font-family: 'Futura', 'sans serif';
+}
+.login__buttons{
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
 }

@@ -47,14 +47,14 @@ const Register = () => {
     let actionData = useActionData();
 
     return (
-        <div>
-            <div>
-                <h2>SIGN UP</h2>
+        <div className="login__wrapper">
+            <div className="login__header">
+                <h2 className="login__title">SIGN UP</h2>
             </div>
             <Form method="post">
                 <input type="hidden" name="redirectTo" value={from} />
-                <div className="form__group">
-                    <label htmlFor="email">Username</label>
+                <div className="login__group">
+                    <label className="login__item" htmlFor="email">Username</label>
                     <input
                         type="text"
                         name="username"
@@ -62,11 +62,12 @@ const Register = () => {
                         placeholder="username"
                         autoComplete="username"
                         defaultValue="tester-0"
+                        className="login__input"
                     />
                     <ErrorField data={actionData} field="username" />
                 </div>
-                <div className="form__group">
-                    <label htmlFor="email">Email</label>
+                <div className="login__group">
+                    <label className="login__item" htmlFor="email">Email</label>
                     <input
                         type="email"
                         name="email"
@@ -74,11 +75,12 @@ const Register = () => {
                         placeholder="e-mail"
                         autoComplete="email"
                         defaultValue="tester@devine.be"
+                        className="login__input"
                     />
                     <ErrorField data={actionData} field="email" />
                 </div>
-                <div className="form__group">
-                    <label htmlFor="password">Password</label>
+                <div className="login__group">
+                    <label className="login__item" htmlFor="password">Password</label>
                     <input
                         type="password"
                         name="password"
@@ -86,17 +88,18 @@ const Register = () => {
                         placeholder="password"
                         autoComplete="current-password"
                         defaultValue="tester"
+                        className="login__input"
                     />
                     <ErrorField data={actionData} field="password" />
                 </div>
-                <div className="form__group">
+                <div className="login__group">
                     <ErrorField data={actionData} field="general" />
                     <button
                         type="submit"
                         disabled={isLoggingIn}
-                        className={actionData && actionData.error ? "shake" : null}
+                        className="login__button"
                     >
-                        {isLoggingIn ? "Sending..." : "Sign up"}
+                        {isLoggingIn ? "SENDING..." : "SIGN UP"}
                     </button>
                 </div>
             </Form>

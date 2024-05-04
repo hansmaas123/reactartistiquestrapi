@@ -90,12 +90,12 @@ const CreateArtwork = () => {
             <Form className="form" method="POST">
                 <div className="form__group">
                     <label className="label" htmlFor="name">TITLE</label>
-                    <input className="input__field" type="text" id="title" name="title" />
+                    <input className="input__field" type="text" id="title" name="title" required />
                 </div>
 
                 <div className="form__group">
                     <label className="label" htmlFor="description">DESCRIPTION</label>
-                    <textarea className="input__field" name="description" id="description" cols="30" rows="5" ></textarea>
+                    <textarea className="input__field" name="description" id="description" cols="30" rows="5" required ></textarea>
                 </div>
             <div className="form__sliders--wrapper">
                 <label className="label">

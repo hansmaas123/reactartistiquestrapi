@@ -50,19 +50,19 @@ const Login = () => {
     let actionData = useActionData();
 
     return (
-        <section>
-            <hgroup className="signin__header">
-                <h2>Sign in</h2>
+        <div className="login__wrapper">
+            <div className="login__header">
+                <h2 className="login__title">SIGN IN</h2>
                 {from != "/" ? (
                     <p>You must log in to view the page at {from}</p>
                 ) : (
                     <p>Get access to all the features</p>
                 )}
-            </hgroup>
+            </div>
             <Form method="post">
-                <div className="form__group">
+                <div className="login__group">
                     <input type="hidden" name="redirectTo" value={from} />
-                    <label htmlFor="email">Email</label>
+                    <label className="login__item" htmlFor="email">Email</label>
                     <input
                         type="email"
                         name="email"
@@ -70,11 +70,12 @@ const Login = () => {
                         placeholder="e-mail"
                         autoComplete="email"
                         defaultValue="tester@devine.be"
+                        className="login__input"
                     />
                     <ErrorField data={actionData} field="email" />
                 </div>
-                <div className="form__group">
-                    <label htmlFor="password">Password</label>
+                <div className="login__group">
+                    <label className="login__item" htmlFor="password">Password</label>
                     <input
                         type="password"
                         name="password"
@@ -82,24 +83,25 @@ const Login = () => {
                         placeholder="Password"
                         autoComplete="current-password"
                         defaultValue="tester"
+                        className="login__input"
                     />
                     <ErrorField data={actionData} field="password" />
                 </div>
-                <div className="form__group">
+                <div className="login__group login__buttons">
                     <ErrorField data={actionData} field="general" />
                     <button
                         type="submit"
                         disabled={isLoggingIn}
                         className="login__button"
                     >
-                        {isLoggingIn ? "Logging in..." : "Login"}
+                        {isLoggingIn ? "LOGGING IN..." : "LOG IN"}
                     </button>
-                    <Link to="/auth/register" className="login__register">
-                        ...or Sign up!
+                    <Link to="/auth/register" className="login__button">
+                        SIGN UP
                     </Link>
                 </div>
             </Form>
-        </section>
+        </div>
     );
 };
 Login.action = action;
