@@ -1,5 +1,6 @@
 import '../styles/style.css';
 import { Link } from 'react-router-dom'
+import AuthStatus from './AuthStatus';
 
 const Header = () => {
     return (
@@ -9,6 +10,7 @@ const Header = () => {
                     <h1 className="title">REACT ARTISTIQUE</h1>
                 </Link>
             </div>
+            <AuthStatus />
         </div>
     )
 }

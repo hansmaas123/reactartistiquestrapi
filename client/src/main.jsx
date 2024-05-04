@@ -8,6 +8,7 @@ import ArtworkDetail from './routes/artworkDetail'
 import CreateArtwork from './routes/createArtwork'
 import ErrorPage from "./routes/error-page";
 import UpdateArtwork from './routes/updateArtwork';
+import Login from './routes/auth/login';
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,12 @@ const router = createBrowserRouter([
         element: <UpdateArtwork />,
         loader: UpdateArtwork.loader,
         action: UpdateArtwork.action
+      },
+      {
+        path: "/auth/login",
+        element: <Login />,
+        loader: Login.loader,
+        action: Login.action
       },
     ]
   }

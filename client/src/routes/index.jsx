@@ -21,7 +21,6 @@ const Index = () => {
     // })
     return (
     <>
-        <Link to={`/artwork/create/`}><button>CREATE</button></Link>
         <ul className="artwork__list">
             {artworks.map((artwork) => (
                 <li key={artwork.id}>

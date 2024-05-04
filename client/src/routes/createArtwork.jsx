@@ -3,6 +3,17 @@ import { Form, redirect } from "react-router-dom";
 import { createArtwork } from "../services/artwork";
 import Art from '../components/Art'
 import { useState } from 'react';
+import { getAuthData } from "../services/auth";
+
+const loader = async ({ request }) => {
+    const { user } = getAuthData();
+    if (!user) {
+        let params = new URLSearchParams();
+        params.set("from", new URL(request.url).pathname);
+        return redirect("/auth/login?" + params.toString());
+    }
+    return null;
+};
 
 const action = async ({ request }) => {
     const formData = await request.formData();
@@ -163,5 +174,6 @@ const CreateArtwork = () => {
 }
 
 CreateArtwork.action = action;
+CreateArtwork.loader = loader;
 
 export default CreateArtwork;

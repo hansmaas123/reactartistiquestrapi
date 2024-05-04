@@ -1,6 +1,43 @@
-import { useLocation, useActionData, useNavigation, Link, Form } from "react-router-dom";
+import { useLocation, useActionData, useNavigation, Link, Form, redirect } from "react-router-dom";
 import "../../styles/style.css";
 import ErrorField from "../../components/Errorfield"
+import { authenticate, getAuthData } from "../../services/auth";
+
+const loader = async () => {
+    const { user } = getAuthData();
+    if (user) {
+        return redirect("/");
+    }
+    return null;
+};
+
+const action = async ({ request }) => {
+    const formData = await request.formData();
+    const { email, password } = Object.fromEntries(formData);
+
+    if (!email) {
+        return {
+            error: { email: "Please enter an email" },
+        };
+    }
+
+    if (!password) {
+        return {
+            error: { password: "Please enter a password" },
+        };
+    }
+
+    try {
+        await authenticate(email, password);
+    } catch (error) {
+        return {
+            error: { general: error.message },
+        };
+    }
+
+    let redirectTo = formData.get("redirectTo") | null;
+    return redirect(redirectTo || "/");
+};
 
 const Login = () => {
     let location = useLocation();
@@ -65,6 +102,7 @@ const Login = () => {
         </section>
     );
 };
-
+Login.action = action;
+Login.loader = loader;
 
 export default Login;
