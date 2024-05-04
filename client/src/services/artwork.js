@@ -30,6 +30,9 @@ const deleteArtwork = async (id) => {
         },
         {
             method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${getToken()}`,
+            }
         },
     );
     if (artwork.error) throw new Error(artwork.error);

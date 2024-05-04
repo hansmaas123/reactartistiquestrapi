@@ -16,7 +16,7 @@ const User = () => {
                 <ul>
                     {user.artworks.map((artwork) => (
                         <li key={artwork.id}>
-                            <Link to={`/artwork/${artwork.id}`} >{artwork.name}</Link>
+                            <Link to={`/artwork/${artwork.id}`} >{artwork.title}</Link>
                         </li>
                     ))}
                 </ul>
