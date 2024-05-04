@@ -70,7 +70,7 @@ export const getToken = () => {
     return authData.jwt;
 };
 
-export const getMe = async () => {
+export const getProfile = async () => {
     const result = await fetch(
         `${import.meta.env.VITE_STRAPI_URL}/api/users/me?populate=*`,
         {
@@ -83,3 +83,7 @@ export const getMe = async () => {
     ).then((res) => res.json());
     return result;
 };
+
+export const removeAuthData = () => {
+    localStorage.removeItem(AUTH_DATA);
+}

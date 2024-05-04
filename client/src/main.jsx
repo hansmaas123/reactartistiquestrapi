@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, redirect } from 'react-router-dom';
 import Index from "./routes";
 import Root from "./routes/root";
 import ArtworkDetail from './routes/artworkDetail'
@@ -11,6 +11,8 @@ import UpdateArtwork from './routes/updateArtwork';
 import Login from './routes/auth/login';
 import Register from './routes/auth/register';
 import Profile from './routes/auth/profile';
+import { removeAuthData } from './services/auth'
+import User from './routes/user'
 
 const router = createBrowserRouter([
   {
@@ -53,7 +55,18 @@ const router = createBrowserRouter([
         path: "/auth/profile",
         element: <Profile />,
         loader: Profile.loader,
-        action: Profile.action,
+      },
+      {
+        path: "/auth/logout",
+        action: async () => {
+          removeAuthData();
+          return redirect("/");
+        },
+      },
+      {
+        path: "/user/:id",
+        element: <User />,
+        loader: User.loader,
       },
     ]
   }
