@@ -397,9 +397,22 @@ a { color: inherit; }
    FORMS (create / update)
    ============================================================ */
 
+/* create / edit: generative preview sits beside the form */
+.editor {
+    display: grid;
+    grid-template-columns: minmax(260px, 400px) minmax(0, 1fr);
+    gap: clamp(1.5rem, 4vw, 3rem);
+    align-items: start;
+}
+.editor__preview { position: sticky; top: 90px; }
+.editor__forms { display: flex; flex-direction: column; gap: 1.5rem; min-width: 0; }
+
+/* required-field asterisk */
+.req { color: var(--accent); font-weight: 700; }
+
 .artwork__visual {
-    margin: 0 0 2rem;
-    max-width: 460px;
+    margin: 0;
+    width: 100%;
     aspect-ratio: 1 / 1;
     border-radius: var(--radius);
     background:
@@ -408,6 +421,11 @@ a { color: inherit; }
     border: 1px solid var(--line);
     overflow: hidden;
     box-shadow: var(--glow);
+}
+
+@media (max-width: 860px) {
+    .editor { grid-template-columns: 1fr; }
+    .editor__preview { position: static; max-width: 460px; }
 }
 .artwork__visual .svg__wrapper { border: none; background: transparent; border-radius: inherit; }
 
@@ -547,7 +565,8 @@ input[type="color"]::-webkit-color-swatch { border: none; border-radius: 6px; }
     cursor: pointer;
     transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
-.submit__button:hover { transform: translateY(-2px); box-shadow: 0 12px 30px -10px rgba(201, 255, 60, 0.55); }
+.submit__button:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 12px 30px -10px rgba(201, 255, 60, 0.55); }
+.submit__button:disabled { opacity: 0.5; cursor: not-allowed; }
 
 .delete__wrapper { margin-top: 1.5rem; }
 .delete__button {
@@ -613,40 +632,51 @@ input[type="color"]::-webkit-color-swatch { border: none; border-radius: 6px; }
     border-color: var(--accent);
     box-shadow: 0 0 0 3px rgba(201, 255, 60, 0.15);
 }
-.login__buttons {
+/* auth actions: full-width primary button, small underlined secondary link */
+.login__actions {
     margin-top: 1.75rem;
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
 }
 .login__button {
+    width: 100%;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0.85rem 1.6rem;
-    border: 1px solid var(--line);
+    padding: 0.95rem 1.6rem;
+    border: 1px solid transparent;
     border-radius: 999px;
-    background: var(--panel-strong);
-    color: var(--ink);
+    background: var(--accent);
+    color: var(--accent-ink);
     font-family: inherit;
-    font-weight: 600;
-    font-size: 0.8rem;
-    letter-spacing: 0.1em;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     text-decoration: none;
     cursor: pointer;
-    transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
-.login__button:hover:not(:disabled) { transform: translateY(-2px); background: rgba(255, 255, 255, 0.12); }
+.login__button:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 12px 30px -10px rgba(201, 255, 60, 0.55); }
 .login__button:disabled { opacity: 0.55; cursor: not-allowed; }
-/* primary submit = the actual <button> (links stay secondary) */
-.login__buttons button.login__button,
-form > div > button.login__button {
-    background: var(--accent);
-    color: var(--accent-ink);
-    border-color: transparent;
+.login__link {
+    align-self: center;
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: inherit;
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+    transition: color 0.18s ease;
 }
-.login__buttons button.login__button:hover:not(:disabled) { box-shadow: 0 12px 30px -10px rgba(201, 255, 60, 0.55); }
+.login__link:hover { color: var(--accent); }
 
 .error {
     margin: 0.4rem 0 0;

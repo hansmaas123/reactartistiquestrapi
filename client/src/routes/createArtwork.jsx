@@ -32,6 +32,10 @@ const CreateArtwork = () => {
         radiusY: 50,
     })
 
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const canSubmit = title.trim() !== "" && description.trim() !== "";
+
     const handleSliderAmountChange = (e) => {
         let updatedValue = { "circles": parseInt(e.target.value, 10) }
         setProperties(properties => ({
@@ -83,19 +87,21 @@ const CreateArtwork = () => {
 
 
     return (
-        <>
+        <div className="editor">
+        <aside className="editor__preview">
         <div className="artwork__visual">
             <Art circles={properties.circles} colour={properties.colour} strokeDistance={properties.strokeDistance} angle={properties.angle} radiusX={properties.radiusX} radiusY={properties.radiusY} />
         </div>
+        </aside>
             <Form className="form" method="POST">
                 <div className="form__group">
-                    <label className="label" htmlFor="name">TITLE</label>
-                    <input className="input__field" type="text" id="title" name="title" required />
+                    <label className="label" htmlFor="title">TITLE <span className="req">*</span></label>
+                    <input className="input__field" type="text" id="title" name="title" value={title} onChange={(e) => setTitle(e.target.value)} required />
                 </div>
 
                 <div className="form__group">
-                    <label className="label" htmlFor="description">DESCRIPTION</label>
-                    <textarea className="input__field" name="description" id="description" cols="30" rows="5" required ></textarea>
+                    <label className="label" htmlFor="description">DESCRIPTION <span className="req">*</span></label>
+                    <textarea className="input__field" name="description" id="description" cols="30" rows="5" value={description} onChange={(e) => setDescription(e.target.value)} required ></textarea>
                 </div>
             <div className="form__sliders--wrapper">
                 <label className="label">
@@ -169,10 +175,10 @@ const CreateArtwork = () => {
                 </label>
                 </div>
                 <div className="form__group">
-                    <input type="submit" className="submit__button" value="ADD ARTWORK" />
+                    <input type="submit" className="submit__button" value="ADD ARTWORK" disabled={!canSubmit} />
                 </div>
             </Form>
-        </>
+        </div>
     );
 }
 

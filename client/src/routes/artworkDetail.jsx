@@ -19,10 +19,14 @@ const ArtworkDetail = () => {
                 <div className="details__wrapper">
                 <h2 className="artwork__title">{artwork.title}</h2>
                 <p className="description">DESCRIPTION: {artwork.description}</p>
-                <p className="by">MADE BY:</p>
-                <Link className="creator" to={`/user/${artwork.owner.data.id}`}>
-                    {`BY ${artwork.owner.data.attributes.username}`}
-                </Link>
+                {artwork.owner?.data && (
+                    <>
+                        <p className="by">MADE BY:</p>
+                        <Link className="creator" to={`/user/${artwork.owner.data.id}`}>
+                            {`BY ${artwork.owner.data.attributes.username}`}
+                        </Link>
+                    </>
+                )}
                 </div>
             <div className='art__wrapper'>
                 <div className="artwork__detail--visual">

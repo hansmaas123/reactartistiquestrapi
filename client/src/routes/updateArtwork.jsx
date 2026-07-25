@@ -13,7 +13,9 @@ const loader = async ({ request, params }) => {
         return redirect("/auth/login?" + params.toString());
     }
     const artwork = await getArtworkById(params.id);
-    if (user.id != artwork.owner.data.id) {
+    // Only enforce ownership when the artwork actually has an owner; the
+    // server's is-owner-artwork policy is the real guard on update/delete.
+    if (artwork.owner?.data?.id && user.id != artwork.owner.data.id) {
         return redirect(`/artwork/${params.id}`);
     }
     return { artwork };
@@ -37,6 +39,10 @@ const UpdateArtwork = () => {
         radiusX: artwork.xradius,
         radiusY: artwork.yradius,
     })
+
+    const [title, setTitle] = useState(artwork.title);
+    const [description, setDescription] = useState(artwork.description);
+    const canSubmit = title.trim() !== "" && description.trim() !== "";
 
     const handleSliderAmountChange = (e) => {
         let updatedValue = { "circles": parseInt(e.target.value, 10) }
@@ -89,19 +95,22 @@ const UpdateArtwork = () => {
     console.log(properties);
 
     return (
-        <>
+        <div className="editor">
+        <aside className="editor__preview">
         <div className="artwork__visual">
                 <Art circles={properties.circles} colour={properties.colour} strokeDistance={properties.strokeDistance} angle={properties.angle} radiusX={properties.radiusX} radiusY={properties.radiusY} />
         </div>
+        </aside>
+        <div className="editor__forms">
             <Form className="form" method="POST">
                 <div className="form__group">
-                    <label className="label" htmlFor="name">Name</label>
-                    <input type="text" className="input__field" id="title" name="title" defaultValue={artwork.title} required />
+                    <label className="label" htmlFor="title">TITLE <span className="req">*</span></label>
+                    <input type="text" className="input__field" id="title" name="title" value={title} onChange={(e) => setTitle(e.target.value)} required />
                 </div>
 
                 <div className="form__group">
-                    <label className="label" htmlFor="description">DESCRIPTION</label>
-                    <textarea className="input__field" name="description" id="description" cols="30" rows="5" defaultValue={artwork.description} required></textarea>
+                    <label className="label" htmlFor="description">DESCRIPTION <span className="req">*</span></label>
+                    <textarea className="input__field" name="description" id="description" cols="30" rows="5" value={description} onChange={(e) => setDescription(e.target.value)} required></textarea>
                 </div>
                 <div className="form__sliders--wrapper">
                 <label className="label">
@@ -175,7 +184,7 @@ const UpdateArtwork = () => {
                 </label>
                 </div>
                 <div className="form__group">
-                    <input type="submit" className="submit__button" value="UPDATE ARTWORK" />
+                    <input type="submit" className="submit__button" value="UPDATE ARTWORK" disabled={!canSubmit} />
                 </div>
             </Form>
             <Form method="post" action="destroy" className="delete__wrapper"
@@ -187,7 +196,8 @@ const UpdateArtwork = () => {
             >
                 <button type="submit" className="submit__button delete__button">DELETE</button>
             </Form>
-        </>
+        </div>
+        </div>
     )
 }
 

@@ -61,7 +61,6 @@ const Register = () => {
                         id="username"
                         placeholder="username"
                         autoComplete="username"
-                        defaultValue="tester-0"
                         className="login__input"
                     />
                     <ErrorField data={actionData} field="username" />
@@ -74,7 +73,6 @@ const Register = () => {
                         id="email"
                         placeholder="e-mail"
                         autoComplete="email"
-                        defaultValue="tester@devine.be"
                         className="login__input"
                     />
                     <ErrorField data={actionData} field="email" />
@@ -87,23 +85,24 @@ const Register = () => {
                         id="password"
                         placeholder="password"
                         autoComplete="current-password"
-                        defaultValue="tester"
                         className="login__input"
                     />
                     <ErrorField data={actionData} field="password" />
                 </div>
                 <div>
                     <ErrorField data={actionData} field="general" />
-                    <button
-                        type="submit"
-                        disabled={isLoggingIn}
-                        className="login__button"
-                    >
-                        {isLoggingIn ? "SENDING..." : "SIGN UP"}
-                    </button>
-                    <Link to="/auth/login" className="login__button">
-                        LOG IN
-                    </Link>
+                    <div className="login__actions">
+                        <button
+                            type="submit"
+                            disabled={isLoggingIn}
+                            className="login__button"
+                        >
+                            {isLoggingIn ? "SENDING..." : "SIGN UP"}
+                        </button>
+                        <Link to="/auth/login" className="login__link">
+                            LOG IN
+                        </Link>
+                    </div>
                 </div>
             </Form>
         </div>

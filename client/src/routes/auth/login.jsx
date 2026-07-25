@@ -69,7 +69,6 @@ const Login = () => {
                         id="email"
                         placeholder="e-mail"
                         autoComplete="email"
-                        defaultValue="tester@devine.be"
                         className="login__input"
                     />
                     <ErrorField data={actionData} field="email" />
@@ -82,13 +81,12 @@ const Login = () => {
                         id="password"
                         placeholder="Password"
                         autoComplete="current-password"
-                        defaultValue="tester"
                         className="login__input"
                     />
                     <ErrorField data={actionData} field="password" />
                 </div>
                     <ErrorField data={actionData} field="general" />
-                <div className="login__group login__buttons">
+                <div className="login__actions">
                     <button
                         type="submit"
                         disabled={isLoggingIn}
@@ -96,7 +94,7 @@ const Login = () => {
                     >
                         {isLoggingIn ? "LOGGING IN..." : "LOG IN"}
                     </button>
-                    <Link to="/auth/register" className="login__button">
+                    <Link to="/auth/register" className="login__link">
                         SIGN UP
                     </Link>
                 </div>
