@@ -1,5 +1,5 @@
 import "../styles/style.css";
-import { Form, redirect } from "react-router-dom";
+import { Form, redirect, useNavigate } from "react-router-dom";
 import { createArtwork } from "../services/artwork";
 import Art from '../components/Art'
 import { useState } from 'react';
@@ -35,6 +35,7 @@ const CreateArtwork = () => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const canSubmit = title.trim() !== "" && description.trim() !== "";
+    const navigate = useNavigate();
 
     const handleSliderAmountChange = (e) => {
         let updatedValue = { "circles": parseInt(e.target.value, 10) }
@@ -87,6 +88,14 @@ const CreateArtwork = () => {
 
 
     return (
+        <>
+        <button type="button" className="back__button" onClick={() => navigate(-1)} aria-label="Go back">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M19 12H5" />
+                <path d="M12 19l-7-7 7-7" />
+            </svg>
+            Back
+        </button>
         <div className="editor">
         <aside className="editor__preview">
         <div className="artwork__visual">
@@ -179,6 +188,7 @@ const CreateArtwork = () => {
                 </div>
             </Form>
         </div>
+        </>
     );
 }
 

@@ -407,8 +407,31 @@ a { color: inherit; }
 .editor__preview { position: sticky; top: 90px; }
 .editor__forms { display: flex; flex-direction: column; gap: 1.5rem; min-width: 0; }
 
-/* required-field asterisk */
-.req { color: var(--accent); font-weight: 700; }
+/* back button (top-left of create / edit) */
+.back__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: clamp(1.25rem, 3vw, 2rem);
+    padding: 0.55rem 1.15rem 0.55rem 0.9rem;
+    border-radius: 999px;
+    background: var(--panel-strong);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 0.76rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+}
+.back__button:hover { transform: translateX(-3px); background: rgba(255, 255, 255, 0.12); border-color: rgba(255, 255, 255, 0.22); }
+.back__button svg { width: 16px; height: 16px; }
+
+/* required-field asterisk — inline, right after the label text */
+.form__group > .label { display: block; }
+.req { margin-left: 0.3rem; color: var(--accent); font-weight: 700; }
 
 .artwork__visual {
     margin: 0;
@@ -568,14 +591,30 @@ input[type="color"]::-webkit-color-swatch { border: none; border-radius: 6px; }
 .submit__button:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 12px 30px -10px rgba(201, 255, 60, 0.55); }
 .submit__button:disabled { opacity: 0.5; cursor: not-allowed; }
 
-.delete__wrapper { margin-top: 1.5rem; }
+/* update + delete on one row; delete is a round icon button */
+.form__actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
 .delete__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    flex: none;
+    padding: 0;
+    border-radius: 50%;
     background: transparent;
     color: var(--danger);
     border: 1px solid rgba(255, 84, 112, 0.5);
-    margin: 0;
+    cursor: pointer;
+    transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
 }
-.delete__button:hover { background: var(--danger); color: #fff; box-shadow: none; }
+.delete__button:hover { background: var(--danger); color: #fff; transform: translateY(-2px); }
+.delete__button svg { width: 20px; height: 20px; }
 
 /* ============================================================
    AUTH (login / register)
