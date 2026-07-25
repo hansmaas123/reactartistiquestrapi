@@ -69,7 +69,10 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}       # e.g. ftp.your-domain.be
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps                            # use "ftp" only if the host has no TLS
+          # Combell's endpoint rejected explicit FTPS ("500 AUTH not understood"),
+          # so use plain FTP. If you later confirm the host supports implicit
+          # FTPS, switch to "ftps-legacy" (port 990) for an encrypted transfer.
+          protocol: ftp
           port: 21
 
           # --- what and where ---
