@@ -1,4 +1,4 @@
-import { Form, useNavigation, useLocation, useActionData, redirect} from "react-router-dom";
+import { Form, useNavigation, useLocation, useActionData, redirect, Link} from "react-router-dom";
 import { register } from "../../services/auth";
 import ErrorField from "../../components/Errorfield";
 import "../../styles/style.css";
@@ -92,7 +92,7 @@ const Register = () => {
                     />
                     <ErrorField data={actionData} field="password" />
                 </div>
-                <div className="login__group">
+                <div>
                     <ErrorField data={actionData} field="general" />
                     <button
                         type="submit"
@@ -101,6 +101,9 @@ const Register = () => {
                     >
                         {isLoggingIn ? "SENDING..." : "SIGN UP"}
                     </button>
+                    <Link to="/auth/login" className="login__button">
+                        LOG IN
+                    </Link>
                 </div>
             </Form>
         </div>

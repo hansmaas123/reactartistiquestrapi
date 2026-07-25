@@ -1,0 +1,84 @@
+name: Deploy client to /www/react
+
+# Builds the React client and uploads the production build to the
+# web host via FTP/FTPS. Strapi (the API + database) is deployed
+# separately — see DEPLOY.md.
+
+on:
+  push:
+    branches: [main]
+    # Only rebuild when the client (or this workflow) actually changes.
+    paths:
+      - "client/**"
+      - ".github/workflows/deploy.yml"
+  workflow_dispatch: {}
+
+# Prevent overlapping deploys from racing on the FTP server.
+concurrency:
+  group: deploy-www-react
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: client
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: client/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        # VITE_STRAPI_URL is baked into the bundle at build time, so it
+        # MUST be the public URL of the deployed Strapi instance.
+        # Set it as a repository *variable* (Settings → Secrets and
+        # variables → Actions → Variables): VITE_STRAPI_URL
+        env:
+          VITE_STRAPI_URL: ${{ vars.VITE_STRAPI_URL }}
+        run: |
+          # Fail fast rather than ship a build that falls back to the
+          # localhost value in client/.env (which would break in production).
+          if [ -z "$VITE_STRAPI_URL" ]; then
+            echo "::error::VITE_STRAPI_URL repository variable is not set. Set it under Settings → Secrets and variables → Actions → Variables, then re-run."
+            exit 1
+          fi
+          case "$VITE_STRAPI_URL" in
+            *localhost*|*127.0.0.1*)
+              echo "::error::VITE_STRAPI_URL points at localhost ($VITE_STRAPI_URL) — that won't work for a deployed site."
+              exit 1
+              ;;
+          esac
+          echo "Building against Strapi at: $VITE_STRAPI_URL"
+          npm run build
+
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          # --- credentials (store as repository SECRETS) ---
+          server: ${{ secrets.FTP_SERVER }}       # e.g. ftp.your-domain.be
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps                            # use "ftp" only if the host has no TLS
+          port: 21
+
+          # --- what and where ---
+          local-dir: ./client/dist/
+          # Target folder on the server. Must end with a trailing slash.
+          # If your FTP login lands in the account root (which already
+          # contains "www"), change this to  www/react/
+          server-dir: /www/react/
+
+          # Keep a manifest on the server so only changed files upload.
+          # Set to true once if the target folder has stale files to purge.
+          dangerous-clean-slate: false

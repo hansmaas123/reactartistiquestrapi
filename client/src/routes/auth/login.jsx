@@ -87,8 +87,8 @@ const Login = () => {
                     />
                     <ErrorField data={actionData} field="password" />
                 </div>
-                <div className="login__group login__buttons">
                     <ErrorField data={actionData} field="general" />
+                <div className="login__group login__buttons">
                     <button
                         type="submit"
                         disabled={isLoggingIn}

@@ -14,6 +14,10 @@ const Root = () => {
             <main>
                 <Outlet />
             </main>
+            <footer className="site__footer">
+                <span>React Artistique — Generative gallery</span>
+                <span>Built with React &amp; Strapi</span>
+            </footer>
         </>
     );
 }
