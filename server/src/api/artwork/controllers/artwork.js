@@ -29,17 +29,32 @@ module.exports = createCoreController("api::artwork.artwork", ({ strapi }) => ({
    */
   async findOne(ctx) {
     const { id } = ctx.params;
-    const query = {
-      ...ctx.query,
-      populate: { owner: { fields: ["username"] } },
-    };
 
-    const entity = await strapi
-      .service("api::artwork.artwork")
-      .findOne(id, query);
+    const entity = await strapi.entityService.findOne(
+      "api::artwork.artwork",
+      id,
+      { populate: { owner: { fields: ["username"] } } }
+    );
+
+    if (!entity) {
+      return ctx.notFound();
+    }
 
     const sanitized = await this.sanitizeOutput(entity, ctx);
+    const response = this.transformResponse(sanitized);
 
-    return this.transformResponse(sanitized);
+    // sanitizeOutput drops the owner relation because the Public role has no
+    // access to users. Re-attach a minimal owner (id + username only, never
+    // the email) so the client can show "MADE BY" and gate the edit button.
+    if (entity.owner) {
+      response.data.attributes.owner = {
+        data: {
+          id: entity.owner.id,
+          attributes: { username: entity.owner.username },
+        },
+      };
+    }
+
+    return response;
   },
 }));
