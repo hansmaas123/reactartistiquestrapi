@@ -13,9 +13,11 @@ const loader = async ({ request, params }) => {
         return redirect("/auth/login?" + params.toString());
     }
     const artwork = await getArtworkById(params.id);
-    // Only enforce ownership when the artwork actually has an owner; the
-    // server's is-owner-artwork policy is the real guard on update/delete.
-    if (artwork.owner?.data?.id && user.id != artwork.owner.data.id) {
+    // Only the owner may edit. Anyone else (or an artwork with no owner) is
+    // sent back to the detail page; the server's is-owner-artwork policy is
+    // the real guard on the update/delete requests.
+    const isOwner = artwork.owner?.data?.id && user.id == artwork.owner.data.id;
+    if (!isOwner) {
         return redirect(`/artwork/${params.id}`);
     }
     return { artwork };

@@ -2,6 +2,7 @@ import { getArtworkById } from "../services/artwork";
 import { useLoaderData, Link } from "react-router-dom";
 import "./../styles/style.css";
 import Art from '../components/Art';
+import { getAuthData } from "../services/auth";
 
 
 const loader = async ({ params }) => {
@@ -12,6 +13,8 @@ const loader = async ({ params }) => {
 
 const ArtworkDetail = () => {
     const { artwork } = useLoaderData();
+    const { user } = getAuthData();
+    const isOwner = user && artwork.owner?.data?.id && user.id == artwork.owner.data.id;
 
     return (
         <div>
@@ -32,7 +35,9 @@ const ArtworkDetail = () => {
                 <div className="artwork__detail--visual">
                 <Art circles={artwork.amount} colour={artwork.colour} strokeDistance={artwork.expand} angle={artwork.angle} radiusX={artwork.xradius} radiusY={artwork.yradius} />
                 </div>
-                <Link className="update__link" to={`/artwork/${artwork.id}/update`}>UPDATE ARTWORK</Link>
+                {isOwner && (
+                    <Link className="update__link" to={`/artwork/${artwork.id}/update`}>UPDATE ARTWORK</Link>
+                )}
             </div>
             </div>
             <div className="row">
